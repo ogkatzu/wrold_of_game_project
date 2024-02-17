@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Game Result</title>
+</head>
+<body>
+    <h1>Guess the Currency</h1>
+    <div class="main_div">
+        {% if result[0] %}
+            <h2>You are correct. The exact amount is {{ result[1] }}</h2>
+        {% else %}
+            <h2>Sorry, your guess was incorrect. The exact amount was {{ result[1] }}</h2>
+        {% endif %}
+        <div>
+            <a class="buttons" href="/" id="vertical-center">Return to Game Selection</a>
+        </div>
+    </div>
+</body>
+</html>

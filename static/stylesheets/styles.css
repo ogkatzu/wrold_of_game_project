@@ -1,0 +1,139 @@
+body {
+    background-color: #474F7A; /* Blue-ish background */
+    color: #FFD0EC;; /* Orange-ish font color */
+    font-family: Arial, sans-serif;
+    font-color: #B67352;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+h1, h2 {
+    text-align: center;
+    color: #FFD0EC;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+.main_div {
+    font-family: "Amazon Ember",sans-serif;
+    margin: auto;
+    border-radius: 25px;
+    width: 600px;
+    height: 900px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* background-color: #1F2544; */
+    background: rgb(99,78,122);
+    background: linear-gradient(0deg, rgba(99,78,122,1) 0%, rgba(71,79,122,1) 100%);
+    border: 1px solid #81689D;
+    padding: 10px;
+}
+
+.buttons {
+    appearance: button;
+    background-color: #FFD0EC;
+    border: 1px solid #81689D;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #474F7A;
+    cursor: pointer;
+    font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    font-size: 14px;
+    line-height: 1.15;
+    overflow: visible;
+    padding: 12px 16px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: all 80ms ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.buttons:disabled {
+    opacity: .5;
+}
+
+.buttons:focus {
+    outline: 0;
+}
+
+.buttons:hover {
+    color: #FFD0EC;
+    background-color: #81689D;
+    border-color: #FFD0EC;
+}
+
+.button:active {
+    background-color: #0039D7;
+    border-color: #0039D7;
+}
+
+.forms {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1f2544;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for form labels */
+.form-lines {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Style for form inputs */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+#guess-game-form {
+    margin-bottom: 20px;
+}
+#guess-game-form-top {
+    margin-top: 30px;
+}
+#curr-game-form {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+#vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#vertical-center-guess {
+  margin: 0;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#start-button {
+  margin: 0;
+  position: relative;
+  left: 38%;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+    <title>Currency Game</title>
+</head>
+<body>
+<div class="main_div">
+    <h1>Currency Conversion Game</h1>
+    <p>Guess the conversion from USD to ILS for ${{ amount_usd }}</p>
+    <form action="/currency-game" method="post">
+        <label for="guess">Enter your guess (ILS): </label>
+        <input type="hidden" id ="difficulty" name="difficulty" value="2">
+        <input type="hidden" id ="amount_usd" name="amount_usd" value="{{ amount_usd }}">
+        <input type="number" id="guess" name="guess" step="0.01" required><br><br>
+        <input type="submit" value="Submit" class="buttons">
+    </form>
+</div>
+</body>
+</html>

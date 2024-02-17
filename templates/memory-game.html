@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to hide the sequence after 1 second
+            function hideSequence() {
+                $("#sequence").hide();
+                $("#user_input_form").show();
+            }
+
+            // Function to automatically hide the sequence after 1 second
+            setTimeout(hideSequence, 700);
+        });
+    </script>
+</head>
+<body>
+    <h1>Memorize the Sequence</h1>
+<div class="main_div">
+        <p id="sequence">{{ sequence }}</p>
+    <form action="/memory-game" method="post" style="display: none;" id="user_input_form">
+        <label for="user_input" class="form-lines">Enter the sequence that was presented on the screen:</label>
+        {% if difficulty == 1 %}
+        <p>Enter the number:</p>
+            <input type="text" id="user_input" name="user_input_1" class="form-input"><br>
+        {% elif difficulty == 2 %}
+        <p>Enter first number:</p>
+            <input type="text" id="user_input" name="user_input_1" class="form-input"><br>
+        <p>Enter second number:</p>
+            <input type="text" id="user_input" name="user_input_2" class="form-input"><br>
+        {% elif difficulty == 3 %}
+         <p>Enter first number:</p>
+            <input type="text" id="user_input" name="user_input_1" class="form-input"><br>
+        <p>Enter second number:</p>
+            <input type="text" id="user_input" name="user_input_2" class="form-input"><br>
+         <p>Enter third number:</p>
+            <input type="text" id="user_input" name="user_input_3" class="form-input"><br>
+        {% endif %}
+        <input type="submit" value="Submit" class="buttons">
+        <input type="hidden" id ="sequence_hidden" name="sequence" value="{{ sequence }}">
+        <input type="hidden" id ="difficulty" name="difficulty" value="{{ difficulty }}">
+    </form>
+    <p></p>
+    <div>
+            <a class="buttons" href="/" id="vertical-center-guess">Return to Game Selection</a>
+    </div>
+</div>
+</body>
+</html>
