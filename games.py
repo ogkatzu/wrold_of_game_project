@@ -2,6 +2,42 @@ import random
 from flask import request
 import ast
 import requests
+import sqlite3
+SCORE = 0
+USERNAME = "player"
+
+
+def update_score_to_db(difficulty) -> None:
+    """
+    Update the user's score to the database.
+
+    Args:
+    - difficulty: the difficulty level of the game
+
+    Returns:
+    - None
+    """
+    # Connect to the database
+    new_score = (difficulty * 3) + 5
+    conn = sqlite3.connect('score.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT score FROM scores WHERE user = ?', (USERNAME,))
+    row = cursor.fetchone()
+    if row is not None:
+        current_score = row[0]
+    else:
+        current_score = 0  # Default score if user doesn't exist yet
+
+    updated_score = current_score + new_score
+    cursor.execute('UPDATE scores SET score = ? WHERE user = ?', (updated_score, USERNAME))
+    conn.commit()
+    conn.close()
+
+# def update_score(difficulty) -> None:
+#     global SCORE
+#     SCORE += (difficulty * 3) + 5
+#     with open("score.txt", "w") as f:
+#         f.write(str(SCORE))
 
 
 class Game:
@@ -24,6 +60,7 @@ class GuessGame(Game):
         secret = str(random.randint(1, self.difficulty))
         guess = request.form['guess']
         if secret == guess:
+            update_score_to_db(self.difficulty)
             return f"You guessed the same as the PC ({secret})"
         result = f"You guessed wrong, the number was {secret}"
         return result
@@ -43,6 +80,9 @@ class MemoryGame(Game):
         # Turning the generated sequence to a real list and not a string
         parsed_seq = ast.literal_eval(gen_seq)
         sequence = [int(item) for item in parsed_seq if isinstance(item, int)]
+        if sequence == user_input:
+            update_score_to_db(difficulty=difficulty)
+            # return f"You guessed the same as the PC ({sequence})"
         return sequence == user_input, sequence
 
 
@@ -71,6 +111,7 @@ class CurrGame(Game):
         guess = float(request.form['guess'])
         exact_answer = round(exact_answer, 2)
         if lower_interval <= guess <= upper_interval:
+            update_score_to_db(difficulty=difficulty)
             return True, exact_answer
         else:
             return False, exact_answer

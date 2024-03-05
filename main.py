@@ -1,8 +1,54 @@
 from flask import Flask, render_template, request
 import games
 import random
+import sqlite3
+USERNAME = str("player")  # "Change this for your username"
+
+
+def connect_to_db():
+    """
+    Connects to the database and creates a scores table if it does not exist.
+    """
+    conn = sqlite3.connect('score.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS scores (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user TEXT NOT NULL,
+        score INTEGER NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+
+def get_user_score(username) -> list:
+    """
+    Function to retrieve the user's score from the 'score.db' database.
+    Takes a username as input and returns the user's score as a list.
+    """
+    conn = sqlite3.connect('score.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT score FROM scores WHERE user = ?', (username,))  # (USERNAME)
+    scores = cursor.fetchall()
+    # Create a new row for the user if it doesn't exist and set the score to 0
+    if not scores:
+        conn.close()
+        conn = sqlite3.connect('score.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO scores (user, score) VALUES (?, ?)', (username, 0))
+        conn.commit()
+        cursor.execute('SELECT score FROM scores WHERE user = ?', (username,))  # (USERNAME)
+        scores = cursor.fetchall()
+        return scores[0][0]
+    return scores[0][0]
+
+
+
 
 app = Flask(__name__)
+
+connect_to_db()
 
 
 def generate_sequence(difficulty):
@@ -10,9 +56,10 @@ def generate_sequence(difficulty):
     return sequence
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    score = get_user_score(username=USERNAME)
+    return render_template("index.html", score=score)
 
 
 @app.route('/play-guess-game', methods=['GET'])
