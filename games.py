@@ -54,10 +54,10 @@ class CurrGame(Game):
         response = requests.get("https://api.exchangerate-api.com/v4/latest/USD")
         exchange_rates = response.json()["rates"]
         rate_to_ils = exchange_rates["ILS"]  # 3.61
-        lower_bound = amount_usd - (5 - self.difficulty)  # amount - 3 = 47
-        upper_bound = amount_usd + (5 - self.difficulty)  # amount + 3 = 53
-        lower_bound_ils = round(lower_bound * rate_to_ils)  # 169
-        upper_bound_ils = round(upper_bound * rate_to_ils)  # 191
+        lower_bound = amount_usd - (5 - self.difficulty)
+        upper_bound = amount_usd + (5 - self.difficulty)
+        lower_bound_ils = round(lower_bound * rate_to_ils)
+        upper_bound_ils = round(upper_bound * rate_to_ils)
         exact_answer = amount_usd * rate_to_ils
 
         return lower_bound_ils, upper_bound_ils, exact_answer
