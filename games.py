@@ -51,15 +51,17 @@ class CurrGame(Game):
         super().__init__("Currency Game")
 
     def get_money_interval(self, amount_usd):
+        # Getting the conversion rate from ILS to USD
         response = requests.get("https://api.exchangerate-api.com/v4/latest/USD")
         exchange_rates = response.json()["rates"]
-        rate_to_ils = exchange_rates["ILS"]  # 3.61
+        rate_to_ils = exchange_rates["ILS"]
+        # Setting the bounds per the user's difficulty
         lower_bound = amount_usd - (5 - self.difficulty)
         upper_bound = amount_usd + (5 - self.difficulty)
         lower_bound_ils = round(lower_bound * rate_to_ils)
         upper_bound_ils = round(upper_bound * rate_to_ils)
         exact_answer = amount_usd * rate_to_ils
-
+        # Returning the bounds and the answer
         return lower_bound_ils, upper_bound_ils, exact_answer
 
     def play(self):
