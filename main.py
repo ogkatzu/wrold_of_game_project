@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import games
 import random
 import sqlite3
-USERNAME = str("player")  # "Change this for your username"
+USERNAME = games.USERNAME
 
 
 def connect_to_db():

@@ -4,7 +4,7 @@ import ast
 import requests
 import sqlite3
 SCORE = 0
-USERNAME = "player"
+USERNAME = "player" # "Change this for your username"
 
 
 def update_score_to_db(difficulty) -> None:
