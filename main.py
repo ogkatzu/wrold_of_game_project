@@ -51,7 +51,7 @@ app = Flask(__name__)
 connect_to_db()
 
 
-def generate_sequence(difficulty):
+def generate_sequence(difficulty) -> list:
     sequence = [random.randint(1, 101) for _ in range(difficulty)]
     return sequence
 
