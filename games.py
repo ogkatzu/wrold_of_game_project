@@ -42,10 +42,11 @@ def update_score_to_db(difficulty) -> None:
 
 class Game:
     def __init__(self, name, difficulty=None):
+        super().__init__()
         self.name = name
         self.difficulty = difficulty
 
-    def set_difficulty(self):
+    def set_difficulty(self) -> None:
         self.difficulty = int(request.form['difficulty'])
 
     def play(self):

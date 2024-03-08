@@ -5,7 +5,7 @@ import sqlite3
 USERNAME = games.USERNAME
 
 
-def connect_to_db():
+def connect_to_db() -> None:
     """
     Connects to the database and creates a scores table if it does not exist.
     """
@@ -22,7 +22,7 @@ def connect_to_db():
     conn.close()
 
 
-def get_user_score(username) -> list:
+def get_user_score(username: str) -> list:
     """
     Function to retrieve the user's score from the 'score.db' database.
     Takes a username as input and returns the user's score as a list.
@@ -40,10 +40,8 @@ def get_user_score(username) -> list:
         conn.commit()
         cursor.execute('SELECT score FROM scores WHERE user = ?', (username,))  # (USERNAME)
         scores = cursor.fetchall()
-        return scores[0][0]
+        # return scores[0][0]
     return scores[0][0]
-
-
 
 
 app = Flask(__name__)
